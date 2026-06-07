@@ -2,70 +2,74 @@
 
 ## Recyclable Waste Management Mobile Application
 
-WasteWorth is a Flutter and Django-based recyclable waste management platform designed to simplify waste pickup scheduling, recycling awareness, and sustainable waste handling through a mobile application and backend management system.
+WasteWorth is a Flutter and Django-based recyclable waste management platform developed to simplify waste pickup scheduling, recycling awareness, and sustainable waste handling.
 
-The platform connects users, drivers, and administrators through an integrated system for managing waste collection requests, pickup scheduling, pickup tracking, billing, reporting, and recycling product information.
+The platform connects users, drivers, and administrators through an integrated system for managing waste collection requests, pickup tracking, driver assignment, billing generation, reporting, and recycling product information.
 
-Drivers can independently accept pickup requests in real time. Once a driver accepts a pickup request, it is automatically removed from the availability list for other drivers, preventing duplicate pickup assignments and improving operational efficiency.
+Drivers can independently accept pickup requests in real time. Once a pickup request is accepted, it is removed from the available pickup list to prevent duplicate assignments and ensure efficient waste collection management.
 
-The application also provides billing generation, transaction management, reporting functionality, user management, and pickup verification through image uploads.
-
-Authentication is implemented using Django REST Framework Token Authentication for secure API communication between the Flutter frontend and Django backend.
+The application combines a Flutter mobile frontend with a Django REST Framework backend and PostgreSQL database.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-* User registration, login, and account management
-* Token-based authentication
-* Waste pickup scheduling system
-* Real-time driver pickup acceptance workflow
-* Duplicate pickup prevention system
-* Pickup tracking and status management
-* Driver management and profile handling
-* Billing and transaction generation
-* Recycling product information and rates
-* Reporting system for issue management
-* Image upload support for pickup verification
-* Flutter frontend integrated with Django REST Framework backend
-* Role-based access for users, drivers, and administrators
-
----
-
-## 🛠️ Technologies Used
-
-### Frontend
-
-* Flutter
-* Dart
-
-### Backend
-
-* Python
-* Django
-* Django REST Framework (DRF)
-
-### Database
-
-* PostgreSQL
-
-### Authentication
-
-* DRF Token Authentication
-
-### Development Tools
-
-* Android Studio
-* VS Code
-
-### Libraries & Packages
-
-* Pillow
-* python-dotenv
+- User registration and login system
+- Token-based authentication
+- User profile management
+- Driver profile and vehicle management
+- Waste pickup scheduling
+- Driver pickup acceptance workflow
+- Available pickup management
+- Pickup status tracking
+- Duplicate pickup prevention
+- Billing and transaction generation
+- Recycling product rates management
+- Driver reporting system
+- Forgot password functionality
+- Media upload support for pickup verification
+- REST API-based communication
+- Flutter mobile application integration
+- PostgreSQL database management
 
 ---
 
-## 📂 Project Structure
+# 🛠️ Technologies Used
+
+## Frontend
+
+- Flutter
+- Dart
+
+## Backend
+
+- Python
+- Django
+- Django REST Framework (DRF)
+
+## Database
+
+- PostgreSQL
+
+## Authentication
+
+- Token Authentication
+
+## Development Tools
+
+- Android Studio
+- VS Code
+
+## Libraries & Packages
+
+- djangorestframework
+- psycopg2-binary
+- Pillow
+- python-dotenv
+
+---
+
+# 📂 Project Structure
 
 ```plaintext
 WasteWorth_App/
@@ -74,16 +78,33 @@ WasteWorth_App/
 ├── ios/
 ├── linux/
 ├── macos/
-├── windows/
 ├── web/
+├── windows/
 │
 ├── assets/
+│   ├── images/
+│   └── videos/
 │
 ├── backend/
+│   │
 │   ├── core/
+│   │   ├── migrations/
+│   │   ├── management/
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   ├── views_forgot_password.py
+│   │   └── admin.py
+│   │
+│   ├── wasteworth_backend/
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── asgi.py
+│   │   └── wsgi.py
+│   │
 │   ├── media/
 │   ├── pickup_photos/
-│   ├── wasteworth_backend/
 │   ├── manage.py
 │   ├── requirements.txt
 │   └── .env
@@ -94,79 +115,126 @@ WasteWorth_App/
 │   ├── login_page.dart
 │   ├── signup_page.dart
 │   ├── home_page.dart
+│   ├── welcome_page.dart
 │   ├── pickups_page.dart
 │   ├── schedule_pickup_page.dart
+│   ├── product_rates_page.dart
 │   ├── user_page.dart
+│   ├── user_profile_page.dart
 │   ├── driver_page.dart
-│   └── additional Flutter screens
+│   ├── driver_pickups_page.dart
+│   ├── driver_profile_page.dart
+│   ├── admin_panel.dart
+│   ├── account_settings_page.dart
+│   ├── forgot_password_page.dart
+│   ├── help_support_page.dart
+│   └── additional application screens
 │
+├── test/
 ├── pubspec.yaml
-├── README.md
-└── wasteworth_app.iml
+├── pubspec.lock
+└── README.md
 ```
 
 ---
 
-## 🚀 How to Run the Project
+# 🚀 How to Run the Project
 
-### Clone the Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/ArshyaBhagat/WasteWorth.git
-cd WasteWorth_App
+cd WasteWorth
 ```
 
-### Backend Setup
+---
+
+## Backend Setup
+
+### Create Virtual Environment
 
 ```bash
-cd backend
-
 python -m venv venv
+```
 
+### Activate Virtual Environment
+
+```bash
 venv\Scripts\activate
+```
 
+### Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
+### Configure Environment Variables
+
+Create `.env` file:
+
+```env
+SECRET_KEY=your_secret_key
+DB_PASSWORD=your_database_password
+```
+
+### Apply Migrations
+
+```bash
 python manage.py migrate
+```
 
+### Run Backend Server
+
+```bash
 python manage.py runserver
 ```
 
-### Frontend Setup
+---
+
+## Frontend Setup
+
+Install Flutter packages:
 
 ```bash
 flutter pub get
+```
 
+Run application:
+
+```bash
 flutter run
 ```
 
 ---
 
-## 🔐 Security
+# 🔐 Security
 
-Sensitive files and local environment configurations are excluded using `.gitignore`.
+Sensitive configuration files and local development data are excluded using `.gitignore`.
 
 Examples:
 
-* `.env`
-* `venv/`
-* uploaded media files
-* cache files
+- .env
+- venv/
+- uploaded media files
+- cache files
 
-The application uses DRF Token Authentication to secure API access and user operations.
+The application uses Token Authentication for protected API access and authenticated user operations.
 
 ---
 
-## 👩‍💻 Developer
+# 👩‍💻 Developer
 
 **Arshya Bhagat**
 
-Developed a recyclable waste management mobile application integrating Flutter frontend development with Django backend technologies. Implemented authentication, pickup scheduling workflows, driver management, billing, reporting, and database-driven functionality.
+Developed a full-stack recyclable waste management platform integrating Flutter mobile development with Django REST Framework backend technologies.
 
-Developed as an academic project focused on sustainable waste management and full-stack application development.
+Responsible for backend API development, database design, authentication implementation, pickup workflow management, billing functionality, reporting modules, and Flutter frontend integration.
+
+Developed as an academic and practical sustainability-focused project.
 
 ---
 
-## 🌱 Vision
+# 🌱 Vision
 
-To encourage responsible waste management, recycling awareness, and sustainable environmental practices through technology-driven solutions that improve the efficiency of recyclable waste collection systems.
+To encourage responsible waste management, recycling awareness, and sustainable environmental practices through technology-driven waste collection and management solutions.
